@@ -1,7 +1,7 @@
-package main
+package newcli
 
 import "fmt"
 
-func main() {
+func Run() {
 	fmt.Println("HELLO NEW CLI")
 }

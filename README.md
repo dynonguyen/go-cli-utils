@@ -38,13 +38,13 @@ new dir/
 new dir/sub1/
 
 # Multiple files & directories
-new file2.go "folder2/{{file2,file3}.go,file4.txt}"
+new folder2/{{file2,file3}.go,file4.txt}
 ```
 
 # Installation
 
 ```go
-go install github.com/dynonguyen/new-cli
+go install github.com/dynonguyen/new-cli/cmd/new@latest
 ```
 
 # Usage
