@@ -38,38 +38,34 @@ new dir/
 new dir/sub1/
 
 # Multiple files & directories
-new folder2/{{file2,file3}.go,file4.txt}
+new folder2/[file2.go,file3.go,file4.txt]
 ```
 
 # Installation
 
-```go
+```sh
 go install github.com/dynonguyen/new-cli/cmd/new@latest
 ```
 
 # Usage
 
-### Create file
-
 ```sh
 # Create file
 new file.go
 new file.go file2.go file3.js
-new {file,file2}.go file3.js
 
 # Create directory (end with /)
 new dir/
 new dir/sub1/sub2/ dir2/
+new "dir/[sub1,sub2]/" # Equivalent: new dir/sub1/ dir/sub2/
 
 # Create file in directory
-new dir/file.go
 new dir/sub1/file.go
-new dir/sub1/sub2/{file,file2}.go
-new dir/sub1/sub2/{{file,file2}.go,file3.js}
+new "dir/sub1/[file.go,file2.go]" # Equivalent: new dir/sub1/file1.go dir/sub2/file2.go
 
 # Space character (surrounded by double quotes)
 new "dir/orange cat/cat.go"
 
 # Combination
-new dir/{file,file2}.go dir/sub1/file.go file3.js
+new "dir/[file.go,file2.go]" dir/sub1/file.go file3.js
 ```
