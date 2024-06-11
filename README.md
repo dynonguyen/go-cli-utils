@@ -1,4 +1,4 @@
-![Logo](https://lh3.googleusercontent.com/pw/AP1GczNLudN-Kcf1Sfd-gSOJD6DZZjiRDEiT129KD9kWeAWnsRVhyCP9yVa5HVEKzjWh2qdgIrfHweA421nOtt5pWMeUa1iqAj0rZtBJu26wNgqmrorerfFwAsHaPjGoE_ixHoZ1H308iQNRqUD21Jt6PqLq=w1440-h810-s-no-gm?authuser=0)
+![Logo](https://www.dropbox.com/scl/fi/3jf52ewmmzejc6cneum81/go-cli.jpeg?rlkey=54pm45ym5el4wxp228uyt46bn&st=jyxmy80l&raw=1)
 
 # Overview
 
