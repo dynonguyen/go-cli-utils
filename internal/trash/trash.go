@@ -1,0 +1,4 @@
+package trashcli
+
+func TrashCli() {
+}

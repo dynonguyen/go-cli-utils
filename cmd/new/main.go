@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	newcli "github.com/dynonguyen/go-cli-utils"
+	newcli "github.com/dynonguyen/go-cli-utils/internal/new"
 )
 
 func main() {
