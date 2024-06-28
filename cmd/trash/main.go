@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	trashcli "github.com/dynonguyen/go-cli-utils/internal/trash"
 )
 
 func main() {
-	fmt.Println("hello trash")
+	trashcli.TrashCli()
 }
