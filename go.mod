@@ -1,3 +1,3 @@
-module github.com/dynonguyen/new-cli
+module github.com/dynonguyen/go-cli-utils
 
-go 1.22.4
+go 1.22

@@ -1,8 +1,10 @@
 ![Logo](https://www.dropbox.com/scl/fi/3jf52ewmmzejc6cneum81/go-cli.jpeg?rlkey=54pm45ym5el4wxp228uyt46bn&st=jyxmy80l&raw=1)
 
-# Overview
+**Some cli utilities are written in go.**
 
-Simplify the process of creating files or directories by combining the `mkdir` and `touch` commands.
+# New Cli
+
+`new` - Simplify the process of creating files or directories by combining the `mkdir` and `touch` commands.
 
 🥹 Using `mkdir` & `touch`
 
@@ -41,13 +43,13 @@ new dir/sub1/
 new folder2/[file2.go,file3.go,file4.txt]
 ```
 
-# Installation
+### Installation
 
 ```sh
-go install github.com/dynonguyen/new-cli/cmd/new@latest
+go install github.com/dynonguyen/go-cli-utils/cmd/new@latest
 ```
 
-# Usage
+### Usage
 
 ```sh
 # Create file
@@ -69,3 +71,7 @@ new "dir/orange cat/cat.go"
 # Combination
 new "dir/[file.go,file2.go]" dir/sub1/file.go file3.js
 ```
+
+# Trash cli
+
+`trash` is a simple, fast, much safer replacement of bash `rm`.
