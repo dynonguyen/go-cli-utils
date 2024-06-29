@@ -1,6 +1,7 @@
 package newcli
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"regexp"
@@ -102,6 +103,18 @@ func getPaths(args *[]string) (paths []string) {
 	}
 
 	return paths
+}
+
+func GetArgs() ([]string, bool) {
+	var verbose bool
+
+	flag.BoolVar(&verbose, "verbose", false, "Verbose output")
+	flag.BoolVar(&verbose, "v", false, "Verbose output")
+
+	flag.Parse()
+	args := flag.Args()
+
+	return args, verbose
 }
 
 func NewCli(args []string, verbose bool) {

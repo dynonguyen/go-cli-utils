@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 
@@ -9,13 +8,7 @@ import (
 )
 
 func main() {
-	var verbose bool
-
-	flag.BoolVar(&verbose, "verbose", false, "Verbose output")
-	flag.BoolVar(&verbose, "v", false, "Verbose output")
-
-	flag.Parse()
-	args := flag.Args()
+	args, verbose := newcli.GetArgs()
 
 	if len(args) == 0 {
 		fmt.Fprintf(os.Stderr, "No paths provided\n")
