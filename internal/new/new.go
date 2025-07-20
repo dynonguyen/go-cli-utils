@@ -9,6 +9,10 @@ import (
 	"strings"
 )
 
+type NewCliFlag struct {
+	Verbose bool
+}
+
 // path = 'abc/xyz/[a.go,b.go]' => ['abc/xyz/a.go', 'abc/xyz/b.go']
 // path = 'abc/xyz/[sub,sub2]/' => ['abc/xyz/sub/', 'abc/xyz/sub2/']
 // path = 'abc/xyz/a.go' => ['abc/xyz/a.go']
@@ -31,14 +35,16 @@ func expandPaths(path string) []string {
 			return r == '[' || r == ']'
 		}), ",")
 
-		paths := []string{}
+		paths := make([]string, 0, len(items))
 
 		for _, item := range items {
+			path := preDir + "/" + item
+
 			if isDir {
-				paths = append(paths, preDir+"/"+item+"/")
-			} else {
-				paths = append(paths, preDir+"/"+item)
+				path += "/"
 			}
+
+			paths = append(paths, path)
 		}
 
 		return paths
@@ -62,6 +68,7 @@ func getDirFile(path string) (dir, file string) {
 
 	file = splits[len(splits)-1]
 	dir = strings.Replace(path, file, "", 1)
+
 	return
 }
 
@@ -71,9 +78,9 @@ func newFile(path string) error {
 	if _, err := os.Stat(path); err == nil {
 		if filename != "" {
 			return fmt.Errorf("file already exists: %v", path)
-		} else {
-			return fmt.Errorf("directory already exists: %v", path)
 		}
+
+		return fmt.Errorf("directory already exists: %v", path)
 	}
 
 	if dir != "" {
@@ -83,18 +90,22 @@ func newFile(path string) error {
 	}
 
 	if filename != "" {
-		if f, err := os.Create(path); err != nil {
+		f, err := os.Create(path)
+
+		if err != nil {
 			return fmt.Errorf("failed to create a file: %v", err)
-		} else {
-			f.Close()
 		}
+
+		f.Close()
 	}
 
 	return nil
 }
 
-func getPaths(args *[]string) (paths []string) {
-	for _, arg := range *args {
+func getPaths(args []string) []string {
+	paths := make([]string, 0, len(args))
+
+	for _, arg := range args {
 		for _, path := range expandPaths(arg) {
 			if !slices.Contains(paths, path) {
 				paths = append(paths, path)
@@ -105,23 +116,34 @@ func getPaths(args *[]string) (paths []string) {
 	return paths
 }
 
-func GetArgs() ([]string, bool) {
-	var verbose bool
+func parseFlags() *NewCliFlag {
+	flags := &NewCliFlag{}
 
-	flag.BoolVar(&verbose, "verbose", false, "Verbose output")
-	flag.BoolVar(&verbose, "v", false, "Verbose output")
+	flag.BoolVar(&flags.Verbose, "verbose", false, "Verbose output")
+	flag.BoolVar(&flags.Verbose, "v", false, "Verbose output")
 
 	flag.Parse()
-	args := flag.Args()
 
-	return args, verbose
+	return flags
 }
 
-func NewCli(args []string, verbose bool) {
-	for _, path := range getPaths(&args) {
-		err := newFile(path)
+func parseArgs() []string {
+	flag.Parse()
+	return flag.Args()
+}
 
-		if verbose {
+func Execute() {
+	flags := parseFlags()
+	args := parseArgs()
+
+	if len(args) == 0 {
+		fmt.Fprintf(os.Stderr, "No paths provided\n")
+		os.Exit(1)
+	}
+
+	for _, path := range getPaths(args) {
+		err := newFile(path)
+		if flags.Verbose {
 			if err != nil {
 				fmt.Println(err)
 			} else {

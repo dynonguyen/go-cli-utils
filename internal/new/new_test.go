@@ -55,7 +55,7 @@ func TestGetPaths(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		if paths := getPaths(&tc.args); !slices.Equal(paths, tc.paths) {
+		if paths := getPaths(tc.args); !slices.Equal(paths, tc.paths) {
 			t.Errorf("FAIL => Input: %v, Expected: '%v' - Actual: '%v'", tc.args, tc.paths, paths)
 		}
 	}

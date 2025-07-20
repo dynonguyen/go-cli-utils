@@ -40,7 +40,7 @@ new dir/
 new dir/sub1/
 
 # Multiple files & directories
-new folder2/[file2.go,file3.go,file4.txt]
+new "folder2/[file2.go,file3.go,file4.txt]"
 ```
 
 ### Installation
